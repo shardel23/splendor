@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public enum Color {
-    RED, GREEN, BLUE, WHITE, BLACK, GOLD;
+    WHITE, BLUE, GREEN, RED, BLACK, GOLD;
 
     public static boolean isBasicColor(Color color){
         return color != Color.GOLD;
