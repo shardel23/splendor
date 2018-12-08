@@ -16,8 +16,8 @@ public class Card {
         this.price = price;
     }
 
-    public boolean canBuyCard(Money money){
-        return price.canPayThePrice(money);
+    public boolean canBuyCard(ColorToAmount colorToAmount){
+        return price.canPayThePrice(colorToAmount);
     }
 
     public Level getLevel() {
