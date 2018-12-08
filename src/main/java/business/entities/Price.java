@@ -16,6 +16,10 @@ public class Price {
         pricePerColor = new Money();
     }
 
+    public Price(Map<Color, Integer> map) {
+        pricePerColor = new Money(map);
+    }
+
     public boolean canPayThePrice(Money money){
         return money.greaterThanOrEqual(pricePerColor);
     }
