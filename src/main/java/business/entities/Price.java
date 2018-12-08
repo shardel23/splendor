@@ -1,22 +1,17 @@
 package main.java.business.entities;
 
-import main.java.business.Color;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class Price {
-    Money pricePerColor;
+    ColorToAmount pricePerColor;
 
-    public Price(Money map) {
-        pricePerColor = new Money(map);
+    public Price(ColorToAmount map) {
+        pricePerColor = new ColorToAmount(map);
     }
 
     public Price() {
-        pricePerColor = new Money();
+        pricePerColor = new ColorToAmount();
     }
 
-    public boolean canPayThePrice(Money money){
-        return money.greaterThanOrEqual(pricePerColor);
+    public boolean canPayThePrice(ColorToAmount colorToAmount){
+        return colorToAmount.greaterThanOrEqual(pricePerColor);
     }
 }
