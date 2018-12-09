@@ -2,25 +2,37 @@ package main.java.business.entities;
 
 import main.java.business.Color;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Price {
-    ColorToAmount pricePerColor;
 
-    public Price(ColorToAmount map) {
-        pricePerColor = new ColorToAmount(map);
-    }
+    Map<Color, Integer> colorToPrice;
 
     public Price() {
-        pricePerColor = new ColorToAmount();
+        colorToPrice = new HashMap<>();
     }
 
-    public boolean canPayThePrice(ColorToAmount colorToAmount) {
-        return colorToAmount.greaterThanOrEqual(pricePerColor);
+    public Price(Price other) {
+        colorToPrice = new HashMap<>(other.colorToPrice);
     }
 
     public Price(Map<Color, Integer> map) {
-        pricePerColor = new ColorToAmount(map);
+        colorToPrice = new HashMap<>(map);
     }
 
+    public boolean canPayThePrice(Wallet wallet) {
+        int missingSum = 0;
+        for (Color color: Color.getBasicValues()) {
+            int diff = wallet.getTotal(color) -  colorToPrice.getOrDefault(color, 0);
+            if (diff < 0) {
+                missingSum += diff;
+            }
+        }
+        return missingSum >= 0 || Math.abs(missingSum) <= wallet.getTotal(Color.GOLD);
+    }
+
+    public Map<Color, Integer> getColorToPrice() {
+        return colorToPrice;
+    }
 }
