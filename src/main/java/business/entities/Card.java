@@ -4,10 +4,10 @@ import main.java.business.Color;
 import main.java.business.Level;
 
 public class Card {
-    Level level;
-    Color colorBonus;
-    int pointsBonus;
-    Price price;
+    private Level level;
+    private Color colorBonus;
+    private int pointsBonus;
+    private Price price;
 
     public Card(Level level, Color colorBonus, int pointsBonus, Price price) {
         this.level = level;
@@ -16,8 +16,8 @@ public class Card {
         this.price = price;
     }
 
-    public boolean canBuyCard(ColorToAmount colorToAmount){
-        return price.canPayThePrice(colorToAmount);
+    public boolean canBuyCard(Wallet wallet){
+        return price.canPayThePrice(wallet);
     }
 
     public Level getLevel() {

@@ -5,7 +5,7 @@ import main.java.business.Exceptions.EmptyDeckException;
 import java.util.*;
 
 public class Deck {
-    List<Card> cards;
+    private List<Card> cards;
 
     public Deck(){
         cards = new ArrayList<>();
