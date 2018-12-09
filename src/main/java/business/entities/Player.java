@@ -6,17 +6,17 @@ import java.util.*;
 
 public class Player {
 
-    private static int MAX_GOLDEN = 3;
+    private static final int MAX_GOLDEN = 3;
 
-    String name;
-    int id;
-    Date dateOfBirth;
+    private String name;
+    private int id;
+    private Date dateOfBirth;
 
-    Wallet wallet;
-    List<Card> cardsInHand;
-    List<Card> goldenCards;
-    Integer points;
-    List<Royal> royalsInHand;
+    private Wallet wallet;
+    private List<Card> cardsInHand;
+    private List<Card> goldenCards;
+    private Integer points;
+    private List<Royal> royalsInHand;
 
     private void initializePlayerHand(){
         wallet = new Wallet();

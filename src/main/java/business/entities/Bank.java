@@ -7,13 +7,13 @@ import java.util.Map;
 
 public class Bank {
 
-    Map<Color, Integer> colorToPrice;
+    private Map<Color, Integer> colorToPrice;
 
     public Bank() {
         colorToPrice = new HashMap<>();
     }
 
-    public Bank(Price other) {
+    public Bank(Bank other) {
         colorToPrice = new HashMap<>(other.colorToPrice);
     }
 

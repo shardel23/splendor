@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Price {
 
-    Map<Color, Integer> colorToPrice;
+    private Map<Color, Integer> colorToPrice;
 
     public Price() {
         colorToPrice = new HashMap<>();

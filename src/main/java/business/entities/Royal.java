@@ -3,7 +3,7 @@ package main.java.business.entities;
 import main.java.business.Color;
 
 public class Royal {
-    Price price;
+    private Price price;
 
     public Royal(){
         price = new Price();

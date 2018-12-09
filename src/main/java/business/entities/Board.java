@@ -6,12 +6,12 @@ import main.java.business.Level;
 import java.util.*;
 
 public class Board {
-    private static int MAX_OPEN_CARDS = 4;
+    private static final int MAX_OPEN_CARDS = 4;
 
-    Bank chipsBank;
-    Map<Level, List<Card>> openCards;
-    Map<Level, Deck> cardDecks;
-    List<Royal> royals;
+    private Bank chipsBank;
+    private Map<Level, List<Card>> openCards;
+    private Map<Level, Deck> cardDecks;
+    private List<Royal> royals;
 
     private void initializeBoard(){
         chipsBank = new Bank();
