@@ -15,7 +15,7 @@ public class Deck {
         cards = new ArrayList<>(deck.cards);
     }
 
-    public Deck(ArrayList<Card> cards){
+    public Deck(List<Card> cards){
         cards = new ArrayList<>(cards);
     }
 
