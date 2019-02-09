@@ -13,6 +13,10 @@ public class Board {
     private Map<Level, Deck> cardDecks;
     private List<Royal> royals;
 
+    public Board(int numOfPlayers) {
+
+    }
+
     private void initializeBoard(){
         chipsBank = new Bank();
         openCards = new HashMap<>();
@@ -54,4 +58,11 @@ public class Board {
     }
 
 
+    public List<Royal> getRoyals() {
+        return royals;
+    }
+
+    public Bank getBank() {
+        return chipsBank;
+    }
 }

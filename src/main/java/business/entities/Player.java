@@ -57,4 +57,13 @@ public class Player {
     public void chooseRoyal() {
 
     }
+
+    public int getVictoryPoints() {
+        // TODO: Implement
+        return -1;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
