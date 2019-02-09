@@ -1,6 +1,6 @@
 package main.java.business.entities;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import main.java.business.Exceptions.NotImplementedException;
 
 import java.util.*;
 
@@ -40,23 +40,23 @@ public class Player {
         board.takeCard(toBuy);
     }
 
-    public void buyCardFromHand() {
+    public void buyCardFromHand() throws NotImplementedException {
         throw new NotImplementedException();
     }
 
-    public void goldenCardFromDeck(Board board) {
+    public void goldenCardFromDeck(Board board) throws NotImplementedException{
         throw new NotImplementedException();
     }
 
-    public void goldenCardFromBoard(Board board) {
+    public void goldenCardFromBoard(Board board) throws NotImplementedException{
         throw new NotImplementedException();
     }
 
-    public void takeChips(Board board) {
+    public void takeChips(Board board) throws NotImplementedException{
         throw new NotImplementedException();
     }
 
-    public void chooseRoyal() {
+    public void chooseRoyal() throws NotImplementedException{
         throw new NotImplementedException();
     }
 }
