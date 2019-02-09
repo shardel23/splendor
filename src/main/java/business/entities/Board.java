@@ -1,11 +1,14 @@
 package main.java.business.entities;
 
 import main.java.business.Exceptions.EmptyDeckException;
-import main.java.business.Level;
+import main.java.business.enums.Level;
 
 import java.util.*;
 
 public class Board {
+    // TODO: initialize (open first cards, royals, initialize bank)
+    // TODO: implement functionality (take card, draw new card, reserve card, take royal...)
+
     private static final int MAX_OPEN_CARDS = 4;
 
     private Bank chipsBank;

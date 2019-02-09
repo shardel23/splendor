@@ -1,11 +1,12 @@
 package main.java.business.entities;
 
-import main.java.business.Color;
+import main.java.business.enums.Color;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Price {
+    // TODO: Verify all functionality is implemented and implemented properly
 
     private Map<Color, Integer> colorToPrice;
 
@@ -32,7 +33,7 @@ public class Price {
         return missingSum >= 0 || Math.abs(missingSum) <= wallet.getTotal(Color.GOLD);
     }
 
-    public Map<Color, Integer> getColorToPrice() {
+    public Map<Color, Integer> getCcolorToPriceolorToPrice() {
         return colorToPrice;
     }
 }

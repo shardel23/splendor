@@ -5,6 +5,8 @@ import main.java.business.Exceptions.EmptyDeckException;
 import java.util.*;
 
 public class Deck {
+    // TODO: verify all functionality is implemented and implemented properly
+
     private List<Card> cards;
 
     public Deck(){

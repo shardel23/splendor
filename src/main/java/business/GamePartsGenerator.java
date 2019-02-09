@@ -3,14 +3,16 @@ package main.java.business;
 import main.java.business.entities.Card;
 import main.java.business.entities.Deck;
 import main.java.business.entities.Price;
+import main.java.business.enums.Color;
+import main.java.business.enums.Level;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static main.java.business.Color.*;
-import static main.java.business.Level.*;
+import static main.java.business.enums.Color.*;
+import static main.java.business.enums.Level.*;
 
 public class GamePartsGenerator {
 

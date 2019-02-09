@@ -1,22 +1,22 @@
 package main.java.business.entities;
 
-public class ChipTotal {
+public class chipBonusPair {
 
     private int count;
     private int bonus;
 
-    public ChipTotal(int count, int bonus) {
+    public chipBonusPair(int count, int bonus) {
         this.count = count;
         this.bonus = bonus;
     }
 
-    public ChipTotal() {
+    public chipBonusPair() {
         this.count = 0;
         this.bonus = 0;
     }
 
     public int getTotal() {
-        return count+bonus;
+        return count + bonus;
     }
 
     public int getCount() {
