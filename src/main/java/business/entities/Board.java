@@ -50,7 +50,7 @@ public class Board {
     private void drawAndPutOnBoard(Level level, int index) {
         try {
             Card newCard = cardDecks.get(level).draw();
-            openCards.get(level).add(newCard);
+            openCards.get(level).add(index, newCard);
         } catch (EmptyDeckException ignored) {
 
         }

@@ -2,29 +2,29 @@ package main.java.business.entities;
 
 public class chipBonusPair {
 
-    private int count;
+    private int chips;
     private int bonus;
 
     public chipBonusPair(int count, int bonus) {
-        this.count = count;
+        this.chips = count;
         this.bonus = bonus;
     }
 
     public chipBonusPair() {
-        this.count = 0;
+        this.chips = 0;
         this.bonus = 0;
     }
 
     public int getTotal() {
-        return count + bonus;
+        return chips + bonus;
     }
 
-    public int getCount() {
-        return count;
+    public int getChips() {
+        return chips;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setChips(int chips) {
+        this.chips = chips;
     }
 
     public int getBonus() {
@@ -33,5 +33,13 @@ public class chipBonusPair {
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
+    }
+
+    public void addBonus(int bonus) {
+        this.bonus += bonus;
+    }
+
+    public void payChips(int chipsPrice){
+        this.chips -= chipsPrice;
     }
 }

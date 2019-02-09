@@ -26,6 +26,7 @@ public class Card {
         return level;
     }
 
+    public Color getColorBonus() { return colorBonus; }
     public int getPointsBonus() {
         return pointsBonus;
     }

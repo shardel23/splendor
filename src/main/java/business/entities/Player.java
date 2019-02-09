@@ -1,5 +1,6 @@
 package main.java.business.entities;
 
+import main.java.business.Exceptions.CantPayPriceException;
 import main.java.business.Exceptions.NotImplementedException;
 
 import java.util.*;
@@ -35,8 +36,17 @@ public class Player {
         initializePlayerHand();
     }
 
-    public void buyCardFromBoard(Board board, Card toBuy) {
-        wallet.pay(toBuy.getPrice());
+    /*
+    *   Play turn
+    *       "choose action": 1. Buy Card    2. Take chips from bank     3. Reserve card
+     */
+
+    public void buyCardFromBoard(Board board, Card toBuy) throws CantPayPriceException{
+        Price cardPrice = toBuy.getPrice();
+        // pay from wallet
+        wallet.pay(cardPrice);
+        cardsInHand.add(toBuy);
+        wallet.addBonus(toBuy.getColorBonus(), toBuy.getPointsBonus());
         board.takeCard(toBuy);
     }
 
