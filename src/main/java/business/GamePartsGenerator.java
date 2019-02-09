@@ -131,7 +131,7 @@ public class GamePartsGenerator {
         return new Deck(cardList);
     }
 
-    public static Deck getLevelThreeDeck() {
+    private static Deck getLevelThreeDeck() {
         List<Card> cardList = new ArrayList<>();
 
         // ------------- BLACK

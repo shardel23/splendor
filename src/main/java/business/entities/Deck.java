@@ -18,7 +18,7 @@ public class Deck {
     }
 
     public Deck(List<Card> cards){
-        cards = new ArrayList<>(cards);
+        this.cards = new ArrayList<>(cards);
     }
 
     public boolean isEmpty(){
@@ -32,5 +32,13 @@ public class Deck {
         Random rand = new Random();
         int location = rand.nextInt(cards.size());
         return cards.remove(location);
+    }
+
+    public int size() {
+        return cards.size();
+    }
+
+    public boolean contains(Card card) {
+        return cards.contains(card);
     }
 }
