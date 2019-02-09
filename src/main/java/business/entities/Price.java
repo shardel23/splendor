@@ -33,7 +33,7 @@ public class Price {
         return missingSum >= 0 || Math.abs(missingSum) <= wallet.getTotal(Color.GOLD);
     }
 
-    public Map<Color, Integer> getCcolorToPriceolorToPrice() {
+    public Map<Color, Integer> getColorToPrice() {
         return colorToPrice;
     }
 }
