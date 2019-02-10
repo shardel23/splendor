@@ -3,6 +3,7 @@ package main.java.business;
 import main.java.business.entities.Card;
 import main.java.business.entities.Deck;
 import main.java.business.entities.Price;
+import main.java.business.entities.Royal;
 import main.java.business.enums.Color;
 import main.java.business.enums.Level;
 
@@ -163,6 +164,23 @@ public class GamePartsGenerator {
         return new Deck(cardList);
     }
 
+    public static List<Royal> getAllRoyals() {
+        List<Royal> royalsList = new ArrayList<>();
+
+        royalsList.add(r("R4G4"));
+        royalsList.add(r("K3R3W3"));
+        royalsList.add(r("B4W4"));
+        royalsList.add(r("K4W4"));
+        royalsList.add(r("B4G4"));
+        royalsList.add(r("G3B3R3"));
+        royalsList.add(r("G3B3W3"));
+        royalsList.add(r("K4R4"));
+        royalsList.add(r("K3B3W3"));
+        royalsList.add(r("K3R3G3"));
+
+        return royalsList;
+    }
+
     public static Price p(String price){    //TODO: move somewhere else?
         Map<Color, Integer> amounts = new HashMap<>();
         for (int i=0; i<price.length(); i+=2){
@@ -175,5 +193,10 @@ public class GamePartsGenerator {
 
     private static Card c(Level l, Color c, int points, Price p) {
         return new Card(l, c, points, p);
+    }
+
+    private static Royal r(String price) {
+       Price royalPrice = p(price);
+        return new Royal(royalPrice);
     }
 }
