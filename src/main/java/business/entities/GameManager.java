@@ -41,11 +41,16 @@ public class GameManager {
         System.out.println("2. Love Ayelet");
         System.out.println("3. Quit");
         int choice = scanner.nextInt();
-
     }
 
     private void showPlayer(Player activePlayer) {
-
+        System.out.println(activePlayer.getName() + " : ");
+        System.out.println("Chips : ");
+        System.out.println(activePlayer.getWallet());
+        System.out.println("Cards bought : ");
+        System.out.println(activePlayer.getCardsInHand());
+        System.out.println("Golden cards : ");
+        System.out.println(activePlayer.getGoldenCards());
     }
 
     private void showBoard() {

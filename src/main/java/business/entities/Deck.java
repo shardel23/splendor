@@ -2,7 +2,9 @@ package main.java.business.entities;
 
 import main.java.business.Exceptions.EmptyDeckException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Deck {
     private List<Card> cards;
@@ -16,7 +18,7 @@ public class Deck {
     }
 
     public Deck(List<Card> cards){
-        cards = new ArrayList<>(cards);
+        this.cards = new ArrayList<>(cards);
     }
 
     public boolean isEmpty(){
