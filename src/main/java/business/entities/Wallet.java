@@ -35,7 +35,7 @@ public class Wallet {
         }
     }
 
-    public boolean canPayCardPrice(Price price){
+    public boolean canPayPrice(Price price) {
         int missingSum = 0;
         Map<Color, Integer> colorToPrice = price.getColorToPrice();
         for (Color color: Color.getBasicValues()) {
@@ -47,7 +47,12 @@ public class Wallet {
         return missingSum >= 0 || Math.abs(missingSum) <= getTotal(Color.GOLD);
     }
 
-    public boolean canPayRoyalPrice(Price price) {      // TODO: possible duplication of Royal.canGetRoyal
+    public boolean canBuyCard(Card card){
+        return canPayPrice(card.getPrice());
+    }
+
+    public boolean canGetRoyal(Royal royal) {      // TODO: possible duplication of Royal.canGetRoyal
+        Price price = royal.getPrice();
         Map<Color, Integer> colorToPrice = price.getColorToPrice();
         for (Color color : Color.getBasicValues()) {
             int diff = getBonus(color) - colorToPrice.getOrDefault(color, 0);
@@ -59,7 +64,7 @@ public class Wallet {
     }
 
     public void pay(Price price) throws CantPayPriceException {
-        if (!canPayCardPrice(price)) throw new CantPayPriceException();
+        if (!canPayPrice(price)) throw new CantPayPriceException();
         int missingChips;
         for (Color color: Color.getBasicValues()) {
             missingChips = price.getColorToPrice().getOrDefault(color, 0) - getBonus(color) ;
