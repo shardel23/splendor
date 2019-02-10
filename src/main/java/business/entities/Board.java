@@ -1,6 +1,6 @@
 package main.java.business.entities;
 
-import main.java.business.Exceptions.EmptyDeckException;
+import main.java.business.exceptions.EmptyDeckException;
 
 import main.java.business.GamePartsGenerator;
 import main.java.business.enums.Level;

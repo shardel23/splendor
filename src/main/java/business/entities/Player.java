@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import main.java.business.Exceptions.CantPayPriceException;
-import main.java.business.Exceptions.NotImplementedException;
-
-import java.util.*;
+import main.java.business.exceptions.CantPayPriceException;
+import main.java.business.exceptions.NotImplementedException;
 
 public class Player {
     // TODO: implement player turn functions (buy card, take chips, reserve card)

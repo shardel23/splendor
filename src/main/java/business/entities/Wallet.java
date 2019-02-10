@@ -1,6 +1,7 @@
 package main.java.business.entities;
 
-import main.java.business.Exceptions.CantPayPriceException;
+import main.java.business.exceptions.CantPayPriceException;
+import main.java.business.exceptions.MoreThanTenChipsException;
 import main.java.business.enums.Color;
 
 import java.util.HashMap;
@@ -8,12 +9,30 @@ import java.util.Map;
 
 public class Wallet {
 
-    private static int MAX_CHIPS = 10;
+    private final static int MAX_CHIPS = 10;
 
-    private Map<Color, ChipBonusPair> chips;
+    private Map<Color, ChipBonusPair> wallet;
 
     public Wallet() {
-        chips = new HashMap<>();
+        wallet = new HashMap<>();
+    }
+
+    public Wallet(Map<Color, ChipBonusPair> wallet) {
+        this.wallet = new HashMap<>(wallet);
+    }
+
+    public Wallet(Map<Color, Integer> chips, Map<Color, Integer> bonuses) throws MoreThanTenChipsException {
+        int sum = chips.values().stream().reduce(0, Integer::sum);
+        if (sum > 10) {
+            throw new MoreThanTenChipsException();
+        }
+        wallet = new HashMap<>();
+        for (Color color: Color.values()) {
+            int chipNum = chips.getOrDefault(color,0);
+            int bonusNum = bonuses.getOrDefault(color, 0);
+            ChipBonusPair colorAmounts = new ChipBonusPair(chipNum, bonusNum);
+            wallet.put(color, colorAmounts);
+        }
     }
 
     public boolean canPayCardPrice(Price price){
@@ -28,7 +47,7 @@ public class Wallet {
         return missingSum >= 0 || Math.abs(missingSum) <= getTotal(Color.GOLD);
     }
 
-    public boolean canPayRoyalPrice(Price price) {
+    public boolean canPayRoyalPrice(Price price) {      // TODO: possible duplication of Royal.canGetRoyal
         Map<Color, Integer> colorToPrice = price.getColorToPrice();
         for (Color color : Color.getBasicValues()) {
             int diff = getBonus(color) - colorToPrice.getOrDefault(color, 0);
@@ -51,24 +70,24 @@ public class Wallet {
     }
 
     public int getTotal(Color color) {
-        ChipBonusPair chipBonusPair = chips.get(color);
+        ChipBonusPair chipBonusPair = wallet.get(color);
         return chipBonusPair == null ? 0 : chipBonusPair.getTotal();
     }
 
     public int getChips(Color color) {
-        ChipBonusPair chipBonusPair = chips.get(color);
+        ChipBonusPair chipBonusPair = wallet.get(color);
         return chipBonusPair == null ? 0 : chipBonusPair.getChips();
     }
 
     public int getBonus(Color color) {
-        ChipBonusPair chipBonusPair = chips.get(color);
+        ChipBonusPair chipBonusPair = wallet.get(color);
         return chipBonusPair == null ? 0 : chipBonusPair.getBonus();
     }
 
     public void addBonus(Color color, int count) {
-        ChipBonusPair chipBonusPair = chips.get(color);
+        ChipBonusPair chipBonusPair = wallet.get(color);
         if (chipBonusPair == null){
-            chips.put(color, new ChipBonusPair(0, count));
+            wallet.put(color, new ChipBonusPair(0, count));
         }
         else {
             chipBonusPair.addBonus(count);
@@ -76,14 +95,22 @@ public class Wallet {
     }
 
     private void payChips(Color color, int count) {
-        ChipBonusPair chipBonusPair = chips.get(color);
+        ChipBonusPair chipBonusPair = wallet.get(color);
         if (chipBonusPair != null) {
             int handCount = chipBonusPair.getChips();
             if (handCount >= count) { chipBonusPair.payChips(count); }
             else {
                 chipBonusPair.setChips(0);
-                chips.get(Color.GOLD).payChips(count - handCount);
+                wallet.get(Color.GOLD).payChips(count - handCount);
             }
         }
+    }
+
+    public int getTotalAmountOfChips(){
+        int totalChips = 0;
+        for (Color color: Color.values()) {
+            totalChips += getChips(color);
+        }
+        return totalChips;
     }
 }
