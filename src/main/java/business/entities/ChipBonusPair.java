@@ -1,16 +1,16 @@
 package main.java.business.entities;
 
-public class chipBonusPair {
+public class ChipBonusPair {
 
     private int chips;
     private int bonus;
 
-    public chipBonusPair(int count, int bonus) {
+    public ChipBonusPair(int count, int bonus) {
         this.chips = count;
         this.bonus = bonus;
     }
 
-    public chipBonusPair() {
+    public ChipBonusPair() {
         this.chips = 0;
         this.bonus = 0;
     }

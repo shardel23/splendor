@@ -19,7 +19,7 @@ public class Card {
     }
 
     public boolean canBuyCard(Wallet wallet){
-        return price.canPayThePrice(wallet);
+        return wallet.canPayCardPrice(price);
     }
 
     public Level getLevel() {

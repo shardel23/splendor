@@ -163,7 +163,7 @@ public class GamePartsGenerator {
         return new Deck(cardList);
     }
 
-    private static Price p(String price){
+    public static Price p(String price){    //TODO: move somewhere else?
         Map<Color, Integer> amounts = new HashMap<>();
         for (int i=0; i<price.length(); i+=2){
             char color = price.charAt(i);

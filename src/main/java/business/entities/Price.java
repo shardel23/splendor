@@ -22,17 +22,6 @@ public class Price {
         colorToPrice = new HashMap<>(map);
     }
 
-    public boolean canPayThePrice(Wallet wallet) {
-        int missingSum = 0;
-        for (Color color: Color.getBasicValues()) {
-            int diff = wallet.getTotal(color) -  colorToPrice.getOrDefault(color, 0);
-            if (diff < 0) {
-                missingSum += diff;
-            }
-        }
-        return missingSum >= 0 || Math.abs(missingSum) <= wallet.getTotal(Color.GOLD);
-    }
-
     public Map<Color, Integer> getColorToPrice() {
         return colorToPrice;
     }
