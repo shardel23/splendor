@@ -1,4 +1,4 @@
-package main.java.business;
+package main.java.business.enums;
 
 import java.util.HashSet;
 import java.util.Set;

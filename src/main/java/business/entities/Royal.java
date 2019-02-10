@@ -1,6 +1,8 @@
 package main.java.business.entities;
 
-import main.java.business.Color;
+import main.java.business.enums.Color;
+
+import java.util.Map;
 
 public class Royal {
     private Price price;
@@ -14,8 +16,9 @@ public class Royal {
     }
 
     public boolean canGetRoyal(Wallet wallet){
+        Map<Color, Integer> royalPrice = price.getColorToPrice();
         for (Color color: Color.getBasicValues()) {
-            int diff = wallet.getBonus(color) -  price.getColorToPrice().getOrDefault(color, 0);
+            int diff = wallet.getBonus(color) -  royalPrice.getOrDefault(color, 0);
             if (diff < 0) {
                 return false;
             }

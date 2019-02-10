@@ -1,11 +1,13 @@
 package main.java.business.entities;
 
-import main.java.business.Color;
+import main.java.business.enums.Color;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Bank {
+    // TODO: Implement bank initialization (C'tor with num of players)
+    // TODO: bank management (borrow/ put back)
 
     private Map<Color, Integer> colorToAmount;
 
@@ -22,6 +24,6 @@ public class Bank {
     }
 
     public int getAmountOfColor(Color color) {
-        return colorToAmount.getOrDefault(color, 0);
+        return colorToAmount.getOrDefault( color, 0);
     }
 }

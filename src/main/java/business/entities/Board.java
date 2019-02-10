@@ -1,8 +1,9 @@
 package main.java.business.entities;
 
 import main.java.business.Exceptions.EmptyDeckException;
+
 import main.java.business.GamePartsGenerator;
-import main.java.business.Level;
+import main.java.business.enums.Level;
 import main.java.business.Utils;
 
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Board {
+    // TODO: initialize (open first cards, royals, initialize bank)
+    // TODO: implement functionality (take card, draw new card, reserve card, take royal...)
+
     private static final int MAX_OPEN_CARDS = 4;
 
     private Bank chipsBank;
@@ -87,7 +91,7 @@ public class Board {
     private void drawAndPutOnBoard(Level level, int index) {
         try {
             Card newCard = cardDecks.get(level).draw();
-            openCards.get(level).add(newCard);
+            openCards.get(level).add(index, newCard);
         } catch (EmptyDeckException ignored) {
 
         }

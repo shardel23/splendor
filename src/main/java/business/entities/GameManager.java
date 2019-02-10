@@ -1,7 +1,7 @@
 package main.java.business.entities;
 
-import main.java.business.Color;
-import main.java.business.Level;
+import main.java.business.enums.Color;
+import main.java.business.enums.Level;
 
 import java.sql.Date;
 import java.time.LocalDate;

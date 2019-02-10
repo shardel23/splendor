@@ -1,9 +1,11 @@
 package main.java.business.entities;
 
-import main.java.business.Color;
-import main.java.business.Level;
+import main.java.business.enums.Color;
+import main.java.business.enums.Level;
 
 public class Card {
+    // TODO: verify all functionality is implemented and implemented properly
+
     private Level level;
     private Color colorBonus;
     private int pointsBonus;
@@ -17,13 +19,14 @@ public class Card {
     }
 
     public boolean canBuyCard(Wallet wallet){
-        return price.canPayThePrice(wallet);
+        return wallet.canPayCardPrice(price);
     }
 
     public Level getLevel() {
         return level;
     }
 
+    public Color getColorBonus() { return colorBonus; }
     public int getPointsBonus() {
         return pointsBonus;
     }

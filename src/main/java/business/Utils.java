@@ -3,11 +3,14 @@ package main.java.business;
 import main.java.business.entities.Bank;
 import main.java.business.entities.Card;
 import main.java.business.entities.Price;
+import main.java.business.entities.Royal;
+import main.java.business.enums.Color;
+import main.java.business.enums.Level;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static main.java.business.Color.*;
+import static main.java.business.enums.Color.*;
 
 public class Utils {
 
@@ -46,5 +49,10 @@ public class Utils {
 
     static Card c(Level l, Color c, int points, Price p) {
         return new Card(l, c, points, p);
+    }
+
+    static Royal r(String price) {
+       Price royalPrice = p(price);
+        return new Royal(royalPrice);
     }
 }

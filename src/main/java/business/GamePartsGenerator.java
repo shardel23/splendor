@@ -2,16 +2,18 @@ package main.java.business;
 
 import main.java.business.entities.Card;
 import main.java.business.entities.Deck;
+import main.java.business.entities.Royal;
+import main.java.business.enums.Level;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static main.java.business.Color.*;
-import static main.java.business.Level.*;
 import static main.java.business.Utils.c;
 import static main.java.business.Utils.p;
+import static main.java.business.enums.Color.*;
+import static main.java.business.enums.Level.*;
 
 public class GamePartsGenerator {
 
@@ -148,5 +150,23 @@ public class GamePartsGenerator {
 
         return new Deck(cardList);
     }
+
+    public static List<Royal> getAllRoyals() {
+        List<Royal> royalsList = new ArrayList<>();
+
+        royalsList.add(Utils.r("R4G4"));
+        royalsList.add(Utils.r("K3R3W3"));
+        royalsList.add(Utils.r("B4W4"));
+        royalsList.add(Utils.r("K4W4"));
+        royalsList.add(Utils.r("B4G4"));
+        royalsList.add(Utils.r("G3B3R3"));
+        royalsList.add(Utils.r("G3B3W3"));
+        royalsList.add(Utils.r("K4R4"));
+        royalsList.add(Utils.r("K3B3W3"));
+        royalsList.add(Utils.r("K3R3G3"));
+
+        return royalsList;
+    }
+
 
 }
