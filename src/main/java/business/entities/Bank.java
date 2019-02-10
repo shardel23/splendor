@@ -7,18 +7,21 @@ import java.util.Map;
 
 public class Bank {
 
-    private Map<Color, Integer> colorToPrice;
+    private Map<Color, Integer> colorToAmount;
 
     public Bank() {
-        colorToPrice = new HashMap<>();
+        colorToAmount = new HashMap<>();
     }
 
     public Bank(Bank other) {
-        colorToPrice = new HashMap<>(other.colorToPrice);
+        colorToAmount = new HashMap<>(other.colorToAmount);
     }
 
     public Bank(Map<Color, Integer> map) {
-        colorToPrice = new HashMap<>(map);
+        colorToAmount = new HashMap<>(map);
     }
 
+    public int getAmountOfColor(Color color) {
+        return colorToAmount.getOrDefault(color, 0);
+    }
 }

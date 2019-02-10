@@ -2,7 +2,6 @@ package main.java.business;
 
 import main.java.business.entities.Card;
 import main.java.business.entities.Deck;
-import main.java.business.entities.Price;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,21 +10,10 @@ import java.util.Map;
 
 import static main.java.business.Color.*;
 import static main.java.business.Level.*;
+import static main.java.business.Utils.c;
+import static main.java.business.Utils.p;
 
 public class GamePartsGenerator {
-
-    private static final Map<Character, Color> CHAR_TO_COLOR = createMap();
-    private static Map<Character, Color> createMap()
-    {
-        // W(white) B(black) G(green) R(red) K(black)
-        Map<Character,Color> myMap = new HashMap<>();
-        myMap.put('W', WHITE);
-        myMap.put('B', BLUE);
-        myMap.put('G', GREEN);
-        myMap.put('R', RED);
-        myMap.put('K', BLACK);
-        return myMap;
-    }
 
     public static Map<Level, Deck> getDecks() {
         Map<Level, Deck> decks = new HashMap<>();
@@ -161,17 +149,4 @@ public class GamePartsGenerator {
         return new Deck(cardList);
     }
 
-    private static Price p(String price){
-        Map<Color, Integer> amounts = new HashMap<>();
-        for (int i=0; i<price.length(); i+=2){
-            char color = price.charAt(i);
-            int amount = Character.getNumericValue(price.charAt(i+1));
-            amounts.put(CHAR_TO_COLOR.get(color), amount);
-        }
-        return new Price(amounts);
-    }
-
-    private static Card c(Level l, Color c, int points, Price p) {
-        return new Card(l, c, points, p);
-    }
 }

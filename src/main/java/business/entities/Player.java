@@ -1,8 +1,8 @@
 package main.java.business.entities;
 
-import main.java.business.Color;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Player {
 
@@ -56,5 +56,26 @@ public class Player {
 
     public void chooseRoyal() {
 
+    }
+
+    public int getVictoryPoints() {
+        // TODO: Implement
+        return -1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public List<Card> getCardsInHand() {
+        return cardsInHand;
+    }
+
+    public List<Card> getGoldenCards() {
+        return goldenCards;
     }
 }
