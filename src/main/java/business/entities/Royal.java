@@ -25,4 +25,8 @@ public class Royal {
         }
         return true;
     }
+
+    public Price getPrice() {
+        return price;
+    }
 }

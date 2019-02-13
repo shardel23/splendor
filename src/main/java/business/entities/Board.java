@@ -6,10 +6,7 @@ import main.java.business.GamePartsGenerator;
 import main.java.business.enums.Level;
 import main.java.business.Utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Board {
     // TODO: initialize (open first cards, royals, initialize bank)
@@ -25,7 +22,8 @@ public class Board {
     public Board(int numOfPlayers) {
         cardDecks = GamePartsGenerator.getDecks();
         initializeOpenCards();
-        royals = new ArrayList<>();
+        List<Royal> royalsDeck = GamePartsGenerator.getAllRoyals();
+        royals = randomizeXRoyals(numOfPlayers+1, royalsDeck);
         if (numOfPlayers == 2) {
             chipsBank = new Bank(Utils.createAmountsMap("W4G4B4R4K4J5"));
         }
@@ -35,6 +33,15 @@ public class Board {
         else {
             chipsBank = new Bank(Utils.createAmountsMap("W7G7B7R7K7J5"));
         }
+    }
+
+    private List<Royal> randomizeXRoyals(int x, List<Royal> royalsDeck) {
+        Random rng = new Random();
+        List<Royal> randomizedRoyals = new ArrayList<>();
+        for (int i=0; i<x; i++) {
+            randomizedRoyals.add(royalsDeck.remove(rng.nextInt(royalsDeck.size())));
+        }
+        return randomizedRoyals;
     }
 
     private void initializeOpenCards() {
@@ -104,5 +111,9 @@ public class Board {
 
     public Bank getBank() {
         return chipsBank;
+    }
+
+    public void setRoyals(List<Royal> royals) {
+        this.royals = royals;
     }
 }

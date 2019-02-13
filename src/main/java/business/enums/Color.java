@@ -19,4 +19,26 @@ public enum Color {
         }
         return basicColors;
     }
+
+    public String getShortName() {
+        if (this.equals(WHITE)) {
+            return "W";
+        }
+        if (this.equals(BLACK)) {
+            return "K";
+        }
+        if (this.equals(BLUE)) {
+            return "B";
+        }
+        if (this.equals(GREEN)) {
+            return "G";
+        }
+        if (this.equals(RED)) {
+            return "R";
+        }
+        if (this.equals(GOLD)) {
+            return "J";
+        }
+        return "";
+    }
 }

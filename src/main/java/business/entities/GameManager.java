@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class GameManager {
@@ -48,14 +49,18 @@ public class GameManager {
         System.out.println("Chips : ");
         System.out.println(activePlayer.getWallet());
         System.out.println("Cards bought : ");
-        System.out.println(activePlayer.getCardsInHand());
+        for (Card card : activePlayer.getCardsInHand()) {
+            showCard(card);
+        }
         System.out.println("Golden cards : ");
-        System.out.println(activePlayer.getGoldenCards());
+        for (Card card : activePlayer.getGoldenCards()) {
+            showCard(card);
+        }
     }
 
     private void showBoard() {
         showRoyals();
-        showCards();
+        showOpenCards();
         showBank();
         showOtherPlayers();
     }
@@ -66,16 +71,33 @@ public class GameManager {
         for (Color color : Color.values()) {
             System.out.print(color + "-" + bank.getAmountOfColor(color) + " ");
         }
+        System.out.println();
     }
 
-    private void showCards() {
+    private void showOpenCards() {
         System.out.println("Open Cards : ");
         for (Level level : Level.values()) {
             System.out.println("Level " + level.name() + " : ");
             List<Card> cards = board.getOpenCards(level);
             for (Card card : cards) {
-                System.out.print(card + " ");
+                showCard(card);
             }
+            System.out.println();
+        }
+    }
+
+    private void showCard(Card card) {
+        System.out.print("VP-" + card.getPointsBonus() + " Bonus-" + card.getColorBonus() +
+                " Price-");
+        showPrice(card.getPrice());
+        System.out.println();
+    }
+
+    private void showPrice(Price price) {
+        Map<Color, Integer> colorToPrice = price.getColorToPrice();
+        for (Color color : colorToPrice.keySet()) {
+            int amount = colorToPrice.get(color);
+            System.out.print(amount + color.getShortName());
         }
     }
 
@@ -83,8 +105,14 @@ public class GameManager {
         List<Royal> royals = board.getRoyals();
         System.out.println("Royals : ");
         for (Royal royal : royals) {
-            System.out.print(royal + " ");
+            showRoyal(royal);
+            System.out.print(" ");
         }
+        System.out.println();
+    }
+
+    private void showRoyal(Royal royal) {
+        showPrice(royal.getPrice());
     }
 
     private void showOtherPlayers() {
