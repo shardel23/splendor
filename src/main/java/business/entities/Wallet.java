@@ -99,6 +99,10 @@ public class Wallet {
         }
     }
 
+    public void increaseBonusByOne(Color color) {
+        addBonus(color, 1);
+    }
+
     private void payChips(Color color, int count) {
         ChipBonusPair chipBonusPair = wallet.get(color);
         if (chipBonusPair != null) {

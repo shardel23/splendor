@@ -5,8 +5,8 @@ public class ChipBonusPair {
     private int chips;
     private int bonus;
 
-    public ChipBonusPair(int count, int bonus) {
-        this.chips = count;
+    public ChipBonusPair(int chips, int bonus) {
+        this.chips = chips;
         this.bonus = bonus;
     }
 

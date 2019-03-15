@@ -50,7 +50,7 @@ public class Player {
 
         wallet.pay(cardPrice);
         cardsInHand.add(toBuy);
-        wallet.addBonus(toBuy.getColorBonus(), toBuy.getPointsBonus());
+        wallet.increaseBonusByOne(toBuy.getColorBonus());
         board.takeCard(level, index);
     }
 

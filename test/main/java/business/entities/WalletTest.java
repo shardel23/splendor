@@ -85,7 +85,7 @@ class WalletTest {
         int greenChips = wallet.getChips(GREEN);
         int total = greenBonus + greenChips;
         int plusOne = 1;
-        wallet.addBonus(GREEN, plusOne);
+        wallet.increaseBonusByOne(GREEN);
         assertEquals(greenChips, wallet.getChips(GREEN));
         assertEquals(greenBonus + plusOne, wallet.getBonus(GREEN));
         assertEquals(total + plusOne, wallet.getTotal(GREEN));
