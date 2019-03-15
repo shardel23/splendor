@@ -54,8 +54,15 @@ public class Player {
         board.takeCard(level, index);
     }
 
-    public void buyCardFromHand() throws NotImplementedException {
-        throw new NotImplementedException();
+    public void buyCardFromHand(int index) throws CantPayPriceException {
+        Card toBuy = goldenCards.get(index);
+        Price cardPrice = toBuy.getPrice();
+
+        wallet.pay(cardPrice);
+        cardsInHand.add(toBuy);
+        wallet.increaseBonusByOne(toBuy.getColorBonus());
+        
+        goldenCards.remove(index);
     }
 
     public void goldenCardFromDeck(Board board) throws NotImplementedException{
