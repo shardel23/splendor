@@ -1,11 +1,9 @@
 package main.java.business;
 
-import main.java.business.entities.Bank;
-import main.java.business.entities.Card;
-import main.java.business.entities.Price;
-import main.java.business.entities.Royal;
+import main.java.business.entities.*;
 import main.java.business.enums.Color;
 import main.java.business.enums.Level;
+import main.java.business.exceptions.MoreThanTenChipsException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,20 +37,30 @@ public class Utils {
         return colorToAmount;
     }
 
-    static Price p(String amounts){
+    public static Price p(String amounts){
         return new Price(createAmountsMap(amounts));
     }
 
-    static Bank b(String amounts){
+    public static Bank b(String amounts){
         return new Bank(createAmountsMap(amounts));
     }
 
-    static Card c(Level l, Color c, int points, Price p) {
+    public static Card c(Level l, Color c, int points, Price p) {
         return new Card(l, c, points, p);
     }
 
-    static Royal r(String price) {
+    public static Royal r(String price) {
        Price royalPrice = p(price);
         return new Royal(royalPrice);
+    }
+
+    public static Wallet w(String chipsAmounts, String bonusAmounts){
+        Wallet wallet = new Wallet();
+        Map<Color, Integer> chips =  createAmountsMap(chipsAmounts);
+        Map<Color, Integer> bonuses =  createAmountsMap(bonusAmounts);
+        try {
+            wallet = new Wallet(chips, bonuses);
+        } catch (MoreThanTenChipsException ignored) {}
+        return wallet;
     }
 }

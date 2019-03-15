@@ -1,6 +1,6 @@
 package main.java.business.entities;
 
-import main.java.business.Exceptions.EmptyDeckException;
+import main.java.business.exceptions.EmptyDeckException;
 
 import main.java.business.GamePartsGenerator;
 import main.java.business.enums.Level;
@@ -11,8 +11,9 @@ import java.util.*;
 public class Board {
     // TODO: initialize (open first cards, royals, initialize bank)
     // TODO: implement functionality (take card, draw new card, reserve card, take royal...)
+    // TODO: return copy or actual properties? (getCard, getOpenCards...)
 
-    private static final int MAX_OPEN_CARDS = 4;
+    public static final int MAX_OPEN_CARDS = 4;
 
     private Bank chipsBank;
     private Map<Level, List<Card>> openCards;
@@ -83,16 +84,19 @@ public class Board {
         return new ArrayList<>(openCards.get(level));
     }
 
-    public void takeCard(Card card) {
-        Level level = card.getLevel();
-        List<Card> sameLevelOpenCards = openCards.get(level);
-        for (Card openCard : sameLevelOpenCards) {
-            if (card.equals(openCard)) {
-                int index = sameLevelOpenCards.indexOf(openCard);
-                sameLevelOpenCards.remove(openCard);
-                drawAndPutOnBoard(level, index);
-            }
+    public Card takeCard(Level level, int index) {
+        if (index < 1 || index > MAX_OPEN_CARDS) {
+            throw new IndexOutOfBoundsException("Card position should be a number between 1 to " + MAX_OPEN_CARDS);
         }
+        return getCard(level, index);
+    }
+
+    public Card getCard(Level level, int index) {
+        int trueIndex = index - 1;
+        List<Card> sameLevelOpenCards = openCards.get(level);
+        Card card = sameLevelOpenCards.remove(trueIndex);
+        drawAndPutOnBoard(level, trueIndex);
+        return card;
     }
 
     private void drawAndPutOnBoard(Level level, int index) {

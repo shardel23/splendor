@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import main.java.business.Exceptions.CantPayPriceException;
-import main.java.business.Exceptions.NotImplementedException;
-
-import java.util.*;
+import main.java.business.enums.Level;
+import main.java.business.exceptions.CantPayPriceException;
+import main.java.business.exceptions.NotImplementedException;
 
 public class Player {
     // TODO: implement player turn functions (buy card, take chips, reserve card)
@@ -45,13 +44,14 @@ public class Player {
     *       "choose action": 1. Buy Card    2. Take chips from bank     3. Reserve card
      */
 
-    public void buyCardFromBoard(Board board, Card toBuy) throws CantPayPriceException{
+    public void buyCardFromBoard(Board board, Level level, int index) throws CantPayPriceException{
+        Card toBuy = board.getCard(level, index);
         Price cardPrice = toBuy.getPrice();
-        // pay from wallet
+
         wallet.pay(cardPrice);
         cardsInHand.add(toBuy);
         wallet.addBonus(toBuy.getColorBonus(), toBuy.getPointsBonus());
-        board.takeCard(toBuy);
+        board.takeCard(level, index);
     }
 
     public void buyCardFromHand() throws NotImplementedException {
