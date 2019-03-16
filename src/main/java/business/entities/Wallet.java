@@ -122,4 +122,7 @@ public class Wallet {
         }
         return totalChips;
     }
+
+    public void addChips(Color color, int amount) {
+    }
 }
