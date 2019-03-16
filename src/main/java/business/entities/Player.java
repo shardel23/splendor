@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import main.java.business.enums.Color;
 import main.java.business.enums.Level;
 import main.java.business.exceptions.CantPayPriceException;
+import main.java.business.exceptions.EmptyDeckException;
 import main.java.business.exceptions.NotImplementedException;
 
 public class Player {
@@ -61,19 +63,23 @@ public class Player {
         wallet.pay(cardPrice);
         cardsInHand.add(toBuy);
         wallet.increaseBonusByOne(toBuy.getColorBonus());
-        
+
         goldenCards.remove(index);
     }
 
-    public void goldenCardFromDeck(Board board) throws NotImplementedException{
-        throw new NotImplementedException();
+    public void goldenCardFromDeck(Board board, Level level) throws EmptyDeckException {
+        Deck deck = board.getCardDecks().get(level);
+        Card cardToGet = deck.draw();
+        int chipsTaken = board.getBank().takeChips(Color.GOLD, 1);
+        goldenCards.add(cardToGet);
+        wallet.addChips(Color.GOLD, chipsTaken);
     }
 
     public void goldenCardFromBoard(Board board) throws NotImplementedException{
         throw new NotImplementedException();
     }
 
-    public void takeChips(Board board) throws NotImplementedException{
+    public void takeChips(Board board, String colors) throws NotImplementedException{
         throw new NotImplementedException();
     }
 

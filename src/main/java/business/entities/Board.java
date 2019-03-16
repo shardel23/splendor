@@ -120,4 +120,8 @@ public class Board {
     public void setRoyals(List<Royal> royals) {
         this.royals = royals;
     }
+
+    public Map<Level, Deck> getCardDecks() {
+        return cardDecks;
+    }
 }

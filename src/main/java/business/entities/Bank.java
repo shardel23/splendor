@@ -26,4 +26,24 @@ public class Bank {
     public int getAmountOfColor(Color color) {
         return colorToAmount.getOrDefault( color, 0);
     }
+
+    /**
+     * Try to take chips of a specific color from the bank.
+     * @param color
+     * @param amountToTake
+     * @return The amountToTake of chips taken, based on availability.
+     */
+    public int takeChips(Color color, int amountToTake) {
+        int amountInBank = colorToAmount.getOrDefault(color, 0);
+        int amountTaken;
+        if (amountToTake > amountInBank) {
+            colorToAmount.put(color, 0);
+            amountTaken = amountInBank;
+        }
+        else {
+            amountTaken = amountToTake;
+            colorToAmount.put(color, amountInBank-amountTaken);
+        }
+        return amountTaken;
+    }
 }
