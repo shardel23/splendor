@@ -48,7 +48,7 @@ public class Player {
     public void buyCardFromBoard(Board board, Level level, int index) throws CantPayPriceException{
         Card toBuy = board.getCard(level, index);
         Price cardPrice = toBuy.getPrice();
-
+        // TODO: Add chips back to the bank
         wallet.pay(cardPrice);
         boughtCards.add(toBuy);
         wallet.increaseBonusByOne(toBuy.getColorBonus());
@@ -58,7 +58,7 @@ public class Player {
     public void buyCardFromHand(int index) throws CantPayPriceException {
         Card toBuy = goldenCards.get(index);
         Price cardPrice = toBuy.getPrice();
-
+        // TODO: Add chips back to the bank
         wallet.pay(cardPrice);
         boughtCards.add(toBuy);
         wallet.increaseBonusByOne(toBuy.getColorBonus());
