@@ -70,13 +70,17 @@ public class Player {
     public void goldenCardFromDeck(Board board, Level level) throws EmptyDeckException {
         Deck deck = board.getCardDecks().get(level);
         Card cardToGet = deck.draw();
-        int chipsTaken = board.getBank().takeChips(Color.GOLD, 1);
+        int goldenChipsTaken = board.getBank().takeChips(Color.GOLD, 1);
         goldenCards.add(cardToGet);
-        wallet.addChips(Color.GOLD, chipsTaken);
+        wallet.addChips(Color.GOLD, goldenChipsTaken);
     }
 
-    public void goldenCardFromBoard(Board board) throws NotImplementedException{
-        throw new NotImplementedException();
+    public void goldenCardFromBoard(Board board, Level level, int index) {
+        Card toReserve = board.getCard(level, index);
+        int goldenChipsTaken = board.getBank().takeChips(Color.GOLD, 1);
+        goldenCards.add(toReserve);
+        board.takeCard(level, index);
+        wallet.addChips(Color.GOLD, goldenChipsTaken);
     }
 
     public void takeChips(Board board, String colors) throws NotImplementedException{
