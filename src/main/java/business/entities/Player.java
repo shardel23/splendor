@@ -11,7 +11,6 @@ import main.java.business.exceptions.EmptyDeckException;
 import main.java.business.exceptions.NotImplementedException;
 
 public class Player {
-    // TODO: implement player turn functions (buy card, take chips, reserve card)
     // TODO: implement getters (get wallet, get cards in hand, get reserved cards...) so player can review it's status
 
     private static final int MAX_GOLDEN = 3;
@@ -21,17 +20,17 @@ public class Player {
     private Date dateOfBirth;
 
     private Wallet wallet;
-    private List<Card> cardsInHand;
+    private List<Card> boughtCards;
     private List<Card> goldenCards;
-    private Integer points;
-    private List<Royal> royalsInHand;
+    private int victoryPoints;
+    private List<Royal> royalsAchieved;
 
     private void initializePlayerHand(){
         wallet = new Wallet();
-        cardsInHand = new ArrayList<>();
+        boughtCards = new ArrayList<>();
         goldenCards = new ArrayList<>(MAX_GOLDEN);
-        points = 0;
-        royalsInHand = new ArrayList<>();
+        victoryPoints = 0;
+        royalsAchieved = new ArrayList<>();
     }
 
     public Player(String name, int id, Date Bday){
@@ -51,7 +50,7 @@ public class Player {
         Price cardPrice = toBuy.getPrice();
 
         wallet.pay(cardPrice);
-        cardsInHand.add(toBuy);
+        boughtCards.add(toBuy);
         wallet.increaseBonusByOne(toBuy.getColorBonus());
         board.takeCard(level, index);
     }
@@ -61,13 +60,13 @@ public class Player {
         Price cardPrice = toBuy.getPrice();
 
         wallet.pay(cardPrice);
-        cardsInHand.add(toBuy);
+        boughtCards.add(toBuy);
         wallet.increaseBonusByOne(toBuy.getColorBonus());
 
         goldenCards.remove(index);
     }
 
-    public void goldenCardFromDeck(Board board, Level level) throws EmptyDeckException {
+    public void reserveGoldenCardFromDeck(Board board, Level level) throws EmptyDeckException {
         Deck deck = board.getCardDecks().get(level);
         Card cardToGet = deck.draw();
         int goldenChipsTaken = board.getBank().takeChips(Color.GOLD, 1);
@@ -75,7 +74,7 @@ public class Player {
         wallet.addChips(Color.GOLD, goldenChipsTaken);
     }
 
-    public void goldenCardFromBoard(Board board, Level level, int index) {
+    public void reserveGoldenCardFromBoard(Board board, Level level, int index) {
         Card toReserve = board.getCard(level, index);
         int goldenChipsTaken = board.getBank().takeChips(Color.GOLD, 1);
         goldenCards.add(toReserve);
@@ -92,8 +91,7 @@ public class Player {
     }
 
     public int getVictoryPoints() {
-        // TODO: Implement
-        return -1;
+        return victoryPoints;
     }
 
     public String getName() {
@@ -104,8 +102,8 @@ public class Player {
         return wallet;
     }
 
-    public List<Card> getCardsInHand() {
-        return cardsInHand;
+    public List<Card> getBoughtCards() {
+        return boughtCards;
     }
 
     public List<Card> getGoldenCards() {
