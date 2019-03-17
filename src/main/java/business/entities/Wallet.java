@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Wallet {
 
-    private final static int MAX_CHIPS = 10;
+    public final static int MAX_CHIPS = 10;
 
     private Map<Color, ChipBonusPair> wallet;
 
@@ -22,10 +22,7 @@ public class Wallet {
     }
 
     public Wallet(Map<Color, Integer> chips, Map<Color, Integer> bonuses) throws MoreThanTenChipsException {
-        int sum = chips.values().stream().reduce(0, Integer::sum);
-        if (sum > 10) {
-            throw new MoreThanTenChipsException();
-        }
+        ValidateWalletSize(chips);
         wallet = new HashMap<>();
         for (Color color: Color.values()) {
             int chipNum = chips.getOrDefault(color,0);
@@ -33,6 +30,28 @@ public class Wallet {
             ChipBonusPair colorAmounts = new ChipBonusPair(chipNum, bonusNum);
             wallet.put(color, colorAmounts);
         }
+    }
+
+    public Wallet(Wallet wallet) {
+        this.wallet = new HashMap<>();
+        for (Color color: wallet.wallet.keySet()) {
+            this.wallet.put(color, new ChipBonusPair(wallet.getChips(color), wallet.getBonus(color)));
+        }
+    }
+
+    private void ValidateWalletSize(Map<Color, Integer> chips) throws MoreThanTenChipsException {
+        int sum =  chips.values().stream().reduce(0, Integer::sum);
+        if (sum > 10) {
+            throw new MoreThanTenChipsException();
+        }
+    }
+
+    public Integer getWalletSize() {
+        int size = 0;
+        for (ChipBonusPair pair: wallet.values()) {
+            size += pair.getChips();
+        }
+        return size;
     }
 
     public boolean canPayPrice(Price price) {
@@ -89,13 +108,13 @@ public class Wallet {
         return chipBonusPair == null ? 0 : chipBonusPair.getBonus();
     }
 
-    public void addBonus(Color color, int count) {
+    public void addBonus(Color color, int amount) {
         ChipBonusPair chipBonusPair = wallet.get(color);
         if (chipBonusPair == null){
-            wallet.put(color, new ChipBonusPair(0, count));
+            wallet.put(color, new ChipBonusPair(0, amount));
         }
         else {
-            chipBonusPair.addBonus(count);
+            chipBonusPair.addBonus(amount);
         }
     }
 
@@ -117,5 +136,15 @@ public class Wallet {
             totalChips += getChips(color);
         }
         return totalChips;
+    }
+
+    public void addChips(Color color, int amount) {
+        ChipBonusPair chipBonusPair = wallet.get(color);
+        if (chipBonusPair == null){
+            wallet.put(color, new ChipBonusPair(amount, 0));
+        }
+        else {
+            chipBonusPair.addChips(amount);
+        }
     }
 }

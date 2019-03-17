@@ -42,4 +42,8 @@ public class ChipBonusPair {
     public void payChips(int chipsPrice){
         this.chips -= chipsPrice;
     }
+
+    public void addChips(int amount) {
+        this.chips += amount;
+    }
 }
