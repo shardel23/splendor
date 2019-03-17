@@ -12,20 +12,14 @@ import static main.java.business.enums.Color.*;
 
 public class Utils {
 
-    private static final Map<Character, Color> CHAR_TO_COLOR = createMap();
-
-    static Map<Character, Color> createMap()
-    {
-        // W(white) B(black) G(green) R(red) K(black) J(gold)
-        Map<Character,Color> myMap = new HashMap<>();
-        myMap.put('W', WHITE);
-        myMap.put('B', BLUE);
-        myMap.put('G', GREEN);
-        myMap.put('R', RED);
-        myMap.put('K', BLACK);
-        myMap.put('J', GOLD);
-        return myMap;
-    }
+    public static final Map<Character, Color> CHAR_TO_COLOR = new HashMap<>() {{
+            put('W', WHITE);
+            put('B', BLUE);
+            put('G', GREEN);
+            put('R', RED);
+            put('K', BLACK);
+            put('J', GOLD);
+        }};
 
     public static Map<Color, Integer> createAmountsMap(String amounts) {
         Map<Color, Integer> colorToAmount = new HashMap<>();
