@@ -1,10 +1,8 @@
 package main.java.business.entities;
 
-import main.java.business.exceptions.EmptyDeckException;
-
 import main.java.business.GamePartsGenerator;
 import main.java.business.enums.Level;
-import main.java.business.Utils;
+import main.java.business.exceptions.EmptyDeckException;
 
 import java.util.*;
 
@@ -25,16 +23,7 @@ public class Board {
         initializeOpenCards();
         List<Royal> royalsDeck = GamePartsGenerator.getAllRoyals();
         royals = randomizeXRoyals(numOfPlayers+1, royalsDeck);
-        // TODO: Refactor- Generalize to Map
-        if (numOfPlayers == 2) {
-            chipsBank = new Bank(Utils.createAmountsMap("W4G4B4R4K4J5"));
-        }
-        else if (numOfPlayers == 3) {
-            chipsBank = new Bank(Utils.createAmountsMap("W5G5B5R5K5J5"));
-        }
-        else {
-            chipsBank = new Bank(Utils.createAmountsMap("W7G7B7R7K7J5"));
-        }
+        chipsBank = new Bank(numOfPlayers);
     }
 
     private List<Royal> randomizeXRoyals(int x, List<Royal> royalsDeck) {
