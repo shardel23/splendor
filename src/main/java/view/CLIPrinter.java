@@ -51,7 +51,7 @@ public class CLIPrinter implements SplendorPrinter {
         System.out.println("Chips : ");
         printWallet(player.getWallet());
         System.out.println("Cards bought : ");
-        printCards(player.getCardsInHand());
+        printCards(player.getBoughtCards());
         System.out.println("Golden cards : ");
         printCards(player.getGoldenCards());
     }

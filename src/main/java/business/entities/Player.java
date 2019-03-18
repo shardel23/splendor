@@ -1,17 +1,16 @@
 package main.java.business.entities;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import main.java.business.Utils;
 import main.java.business.enums.Color;
 import main.java.business.enums.Level;
 import main.java.business.exceptions.*;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 public class Player {
-    // TODO: implement player turn functions (buy card, take chips, reserve card)
     // TODO: implement getters (get wallet, get cards in hand, get reserved cards...) so player can review it's status
 
     private static final int MAX_GOLDEN = 3;
@@ -21,17 +20,17 @@ public class Player {
     private Date dateOfBirth;
 
     private Wallet wallet;
-    private List<Card> cardsInHand;
+    private List<Card> boughtCards;
     private List<Card> goldenCards;
-    private Integer points;
-    private List<Royal> royalsInHand;
+    private int victoryPoints;
+    private List<Royal> royalsAchieved;
 
     private void initializePlayerHand(){
         wallet = new Wallet();
-        cardsInHand = new ArrayList<>();
+        boughtCards = new ArrayList<>();
         goldenCards = new ArrayList<>(MAX_GOLDEN);
-        points = 0;
-        royalsInHand = new ArrayList<>();
+        victoryPoints = 0;
+        royalsAchieved = new ArrayList<>();
     }
 
     public Player(String name, int id, Date Bday){
@@ -49,23 +48,38 @@ public class Player {
     public void buyCardFromBoard(Board board, Level level, int index) throws CantPayPriceException{
         Card toBuy = board.getCard(level, index);
         Price cardPrice = toBuy.getPrice();
-
+        // TODO: Add chips back to the bank
         wallet.pay(cardPrice);
-        cardsInHand.add(toBuy);
-        wallet.addBonus(toBuy.getColorBonus(), toBuy.getPointsBonus());
+        boughtCards.add(toBuy);
+        wallet.increaseBonusByOne(toBuy.getColorBonus());
         board.takeCard(level, index);
     }
 
-    public void buyCardFromHand() throws NotImplementedException {
-        throw new NotImplementedException();
+    public void buyCardFromHand(int index) throws CantPayPriceException {
+        Card toBuy = goldenCards.get(index);
+        Price cardPrice = toBuy.getPrice();
+        // TODO: Add chips back to the bank
+        wallet.pay(cardPrice);
+        boughtCards.add(toBuy);
+        wallet.increaseBonusByOne(toBuy.getColorBonus());
+
+        goldenCards.remove(index);
     }
 
-    public void goldenCardFromDeck(Board board) throws NotImplementedException{
-        throw new NotImplementedException();
+    public void reserveGoldenCardFromDeck(Board board, Level level) throws EmptyDeckException, MissingChipsInBankException {
+        Deck deck = board.getCardDecks().get(level);
+        Card cardToGet = deck.draw();
+        board.getBank().takeChips(Color.GOLD, 1);
+        goldenCards.add(cardToGet);
+        wallet.addChips(Color.GOLD, 1);
     }
 
-    public void goldenCardFromBoard(Board board) throws NotImplementedException{
-        throw new NotImplementedException();
+    public void reserveGoldenCardFromBoard(Board board, Level level, int index) throws MissingChipsInBankException {
+        Card toReserve = board.getCard(level, index);
+        board.getBank().takeChips(Color.GOLD, 1);
+        goldenCards.add(toReserve);
+        board.takeCard(level, index);
+        wallet.addChips(Color.GOLD, 1);
     }
 
     public void takeChips(Board board, String chipsToTake)
@@ -136,8 +150,7 @@ public class Player {
     }
 
     public int getVictoryPoints() {
-        // TODO: Implement
-        return -1;
+        return victoryPoints;
     }
 
     public String getName() {
@@ -148,8 +161,8 @@ public class Player {
         return wallet;
     }
 
-    public List<Card> getCardsInHand() {
-        return cardsInHand;
+    public List<Card> getBoughtCards() {
+        return boughtCards;
     }
 
     public List<Card> getGoldenCards() {

@@ -25,6 +25,7 @@ public class Board {
         initializeOpenCards();
         List<Royal> royalsDeck = GamePartsGenerator.getAllRoyals();
         royals = randomizeXRoyals(numOfPlayers+1, royalsDeck);
+        // TODO: Refactor- Generalize to Map
         if (numOfPlayers == 2) {
             chipsBank = new Bank(Utils.createAmountsMap("W4G4B4R4K4J5"));
         }
@@ -119,5 +120,9 @@ public class Board {
 
     public void setRoyals(List<Royal> royals) {
         this.royals = royals;
+    }
+
+    public Map<Level, Deck> getCardDecks() {
+        return cardDecks;
     }
 }

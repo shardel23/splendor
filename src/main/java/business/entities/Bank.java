@@ -30,6 +30,12 @@ public class Bank {
         return colorToAmount.getOrDefault( color, 0);
     }
 
+    /**
+     * Try to take chips of a specific color from the bank.
+     * @param color
+     * @param amount
+     * @return The amountToTake of chips taken, based on availability.
+     */
     public void takeChips(Color color, Integer amount) throws MissingChipsInBankException {
         if (colorToAmount.getOrDefault(color, 0) < amount) {
             throw new MissingChipsInBankException();

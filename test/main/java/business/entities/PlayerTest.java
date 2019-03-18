@@ -5,6 +5,9 @@ import main.java.business.enums.Color;
 import main.java.business.exceptions.IllegalTakeChipsException;
 import main.java.business.exceptions.MissingChipsInBankException;
 import main.java.business.exceptions.MoreThanTenChipsException;
+import main.java.business.enums.Color;
+import main.java.business.enums.Level;
+import main.java.business.exceptions.EmptyDeckException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,6 +31,9 @@ class PlayerTest {
     private static final String UNFULL_WALLET_STR = "K2J1B1G2";
     private static final String BANK_CONTENT = "J1G3W5R5K5";
 
+    //Shahar
+    private Player player;
+
     @BeforeAll
     public static void beforeAll() {
         bank = Utils.b(BANK_CONTENT);
@@ -37,6 +43,10 @@ class PlayerTest {
     public void beforeEach() {
         unfull_player = setPlayer(UNFULL_WALLET_STR);
         board = setBoard(bank);
+        player = new Player("Name", 100, new Date());
+        for (Color color : Color.getBasicValues()) {
+            player.getWallet().addChips(color, 1);
+        }
     }
 
     private static Player setPlayer(String walletStr) {
@@ -149,6 +159,36 @@ class PlayerTest {
     public void illegalTakeThreeChipsNotInBank() {
         String illegalTakeThreeChipsNotInBank = "K1B1W1";
         IllegalExecution(MissingChipsInBankException.class, illegalTakeThreeChipsNotInBank);
+    }
+
+    @Test
+    void buyCardFromBoard() {
+
+    }
+
+    @Test
+    void buyCardFromHand() {
+    }
+
+    @Test
+    void reserveGoldenCardFromDeck() {
+        Level level = Level.THREE;
+        Deck deck = board.getCardDecks().get(level);
+        int originalDeckSize = deck.size();
+        int originalGoldenChips = player.getWallet().getChips(Color.GOLD);
+        try {
+            player.reserveGoldenCardFromDeck(board, level);
+        } catch (EmptyDeckException e) {
+            fail("Deck should not be empty on startup");
+        } catch (MissingChipsInBankException e) {
+            fail("There should be golden chip available in the bank");
+        }
+        assertEquals(originalDeckSize - 1, deck.size());
+        assertEquals(originalGoldenChips + 1, player.getWallet().getChips(Color.GOLD));
+    }
+
+    @Test
+    void reserveGoldenCardFromBoard() {
     }
 
     private static <T extends Throwable> void IllegalExecution(Class<T> expectedTException, String takeStr) {
